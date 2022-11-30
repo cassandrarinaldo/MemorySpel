@@ -1,9 +1,0 @@
-using System;
-namespace Memory_game
-{
-	public class BrickaPlus : IBricka
-	{
-		public string Symbol { get; init; } = "+";
-    }
-}
-
