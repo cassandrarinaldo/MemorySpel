@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OOP1_Projekt
+{
+    class Drag : SpelPlan
+    {
+        IBricka[] spelArray;
+        int drag1, drag2;
+        public Drag(IBricka[] spel) 
+        { 
+            spelArray= spel;
+            this.CreateStringArray(spelArray);
+            this.changeAlltoIndex();
+        }
+        public void FirstLook()
+        {
+            Console.WriteLine("Du kommer nu få se vart alla symboler är på brädet.");
+            Console.ReadLine();
+            this.PrintFramsida();
+            Console.ReadLine();
+            Console.Clear();
+            this.Print();
+        }
+        public void FörstaDraget()
+        {
+            Console.WriteLine("Ange vilken första bricka du vill vända på!");
+            drag1 = Convert.ToInt32(Console.ReadLine());
+            this.changeToSymbol(drag1);
+            this.Print();
+        }
+        public void AndraDraget()
+        {
+            Console.WriteLine("Ange den andra brickan du vill vända på!");
+            drag2 = Convert.ToInt32(Console.ReadLine());
+            if (drag2 == drag1)
+            {
+                Console.WriteLine("Vänligen ange en annan bricka!");
+                AndraDraget();
+            }
+            this.changeToSymbol(drag2);
+            this.Print();
+        }
+    }
+}
