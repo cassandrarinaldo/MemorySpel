@@ -1,0 +1,66 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OOP1_Projekt
+{
+    abstract class SpelPlan
+    {
+        public IBricka[] symbolArray;
+        public int FörstaBrickan;
+        public int AndraBrickan;
+        public string[] printArray = new string[12];
+        public string[] CreateStringArray(IBricka[] spelArray)
+        {
+            for(int i = 0; i < spelArray.Length; i++)
+            {
+                symbolArray[i] = spelArray[i];
+                printArray[i] = spelArray[i].symbol;
+            }
+            return printArray;
+        }
+        public string[] changeAlltoIndex()
+        {
+            for (int i = 0; i < symbolArray.Length; i++)
+            {
+                string index = Convert.ToString(i + 1);
+                printArray[i] = index;
+            }
+            return printArray;
+        }
+        public string[] changeToSymbol(int indexplats)
+        {
+            printArray[indexplats] = symbolArray[indexplats].symbol;
+            return printArray;
+        }
+        public string[] changeToIndex(int indexplats)
+        {
+            string index = Convert.ToString(indexplats);
+            printArray[indexplats-1] = index;
+            
+            return printArray;
+        }
+        public void PrintFramsida()
+        {
+            Console.WriteLine("-------------------------");
+            Console.WriteLine($"| {symbolArray[0].symbol} | {symbolArray[1].symbol} | {symbolArray[2].symbol} | {symbolArray[3].symbol} | " +
+                $"{symbolArray[4].symbol} | {symbolArray[5].symbol} |");
+            Console.WriteLine("-------------------------");
+            Console.WriteLine($"| {symbolArray[6].symbol} | {symbolArray[7].symbol} | {symbolArray[8].symbol} | " +
+                $"{symbolArray[9].symbol} | {symbolArray[10].symbol} | {symbolArray[11].symbol} |");
+            Console.WriteLine("-------------------------");
+        }
+        public void Print()
+        {
+            Console.WriteLine("-------------------------");
+            Console.WriteLine($"| {printArray[0]} | {printArray[1]} | {printArray[2]} | {printArray[3]} | " +
+                $"{printArray[4]} | {printArray[5]} |");
+            Console.WriteLine("-------------------------");
+            Console.WriteLine($"| {printArray[6]} | {printArray[7]} | {printArray[8]} | " +
+                $"{printArray[9]} | {printArray[10]} | {printArray[11]} |");
+            Console.WriteLine("-------------------------");
+        }
+    }
+}
