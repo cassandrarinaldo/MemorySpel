@@ -1,0 +1,18 @@
+using System;
+namespace Memory_game
+{
+	public class BrickaValfri: IBricka
+	{
+		public string Symbol { get; init; }
+
+		public BrickaValfri(string text)
+		{
+			this.Symbol = text;
+		}
+		public BrickaValfri(int siffror)
+		{
+			this.Symbol = siffror.ToString();
+		}
+	}
+}
+
