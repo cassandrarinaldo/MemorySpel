@@ -1,36 +1,36 @@
 using System;
+using Memory_game;
 
-namespace OOP1_Projekt
+namespace Memory_game
 {
-    public class Statistik
+    public class Statestik
     {
         public int NewCount { get; set; }
         public int OldCount { get; set; }
-        private Spelare spelare;
-        public Statistik(Spelare spelare, int count)
+        public void UppdateraCount(int count, ISpelare spelare)
         {
-            this.spelare = spelare;
             this.NewCount = count;
-        }
-        public void UppdateraCount()
-        {
-            PrintStatistik();
+            PrintStatistik(spelare);
             OldCount = NewCount;
         }
-        public void PrintStatistik()
+        public void PrintStatistik(ISpelare spelare)
         {
-            if(NewCount < OldCount)
-            { 
-                Console.WriteLine("Bra jobbat! Du använde färre drag än förra spelet!");
-                Console.WriteLine($"Den här gången använda du {NewCount} drag, i jämförelse med förra gången då du använde {OldCount} drag!");
-            }
-            else if(NewCount == OldCount)
+            if (OldCount == 0)
             {
-                Console.WriteLine($"Du använde {NewCount}, vilket är lika många drag som förra gången! Bra jobbat!");
+                Console.WriteLine($"Bra jobbat {spelare.Name}! Du använde {NewCount} drag.\n");
+            }
+            else if (NewCount < OldCount)
+            {
+                Console.WriteLine($"Bra jobbat {spelare.Name}! Du använde färre drag än förra spelet!");
+                Console.WriteLine($"Den här gången använda du {NewCount} drag, i jämförelse med förra gången då du använde {OldCount} drag!\n");
+            }
+            else if (NewCount == OldCount)
+            {
+                Console.WriteLine($"Du använde {NewCount}, vilket är lika många drag som förra gången! Bra jobbat {spelare.Name}!\n");
             }
             else
             {
-                Console.WriteLine($"Du använde {NewCount} drag, vilket är fler än förra gången, då du använde dig av {OldCount} drag.");
+                Console.WriteLine($"Du använde {NewCount} drag, vilket är fler än förra gången, då du använde dig av {OldCount} drag. Bättre lycka nästa gång {spelare.Name}.\n");
             }
         }
     }
