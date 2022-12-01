@@ -1,0 +1,17 @@
+using System;
+namespace Memory_game
+{
+	public class StartaSpel
+	{
+		public StartaSpel(ISpelare spelare)
+		{
+            arrayBricka array = new arrayBricka();
+            IBricka[] ejRandom = array.SkapaArray();
+            IBricka[] random = new arrayRandom().RandomArray(ejRandom);
+            SuperSpel drag = new SpelaSpel(random, spelare); //kan bytas ut mot ett annat objekt som också ärver av Superklassen, ex spel med flera spelare eller med AI
+            drag.Game();
+        }
+	}
+    
+}
+
