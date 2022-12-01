@@ -1,0 +1,13 @@
+using System;
+
+namespace OOP1_Projekt
+{
+    public class Spelare
+    {
+        public string Name { get; init; }
+        public Spelare(string name)
+        {
+            this.Name = name;
+        }
+    }
+}
