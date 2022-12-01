@@ -1,0 +1,14 @@
+using System;
+namespace Memory_game
+{
+	public class Bricka: IBricka
+	{
+		public string Symbol { get; init; }
+
+		public Bricka(string text)
+		{
+			this.Symbol = text;
+		}
+	}
+}
+
