@@ -1,0 +1,47 @@
+using System;
+namespace Memory_game
+{
+    public class arrayRandom
+    {
+        public IBricka[] ArraySpelplan { get; init; } = new IBricka[12];
+        public int RandomNumber()
+        {
+            Random random = new Random();
+            int number = random.Next(0, 12);
+            return number;
+        }
+
+        public IBricka[] RandomArray(IBricka[] objektArray)
+        {
+            for (int i = 0; i < this.ArraySpelplan.Length; i++)
+            {
+                if (i < objektArray.Length)
+                {
+                    int number = RandomNumber();
+                    if (this.ArraySpelplan[number] == null)
+                    {
+                        this.ArraySpelplan[number] = objektArray[i];
+                    }
+                    else
+                    {
+                        i--;
+                    }
+                }
+                else
+                {
+                    int number = RandomNumber();
+                    if (this.ArraySpelplan[number] == null)
+                    {
+                        this.ArraySpelplan[number] = objektArray[i - objektArray.Length];
+                    }
+                    else
+                    {
+                        i--;
+                    }
+                }
+            }
+            return ArraySpelplan;
+        }
+    }
+}
+
