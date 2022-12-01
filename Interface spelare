@@ -1,0 +1,10 @@
+using System;
+namespace Memory_game
+{
+	public interface ISpelare
+	{
+		string Name { get; init; }
+		Statestik Statestik { get; set; }
+	}
+}
+
