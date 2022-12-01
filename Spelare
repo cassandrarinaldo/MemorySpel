@@ -1,13 +1,16 @@
 using System;
 
-namespace OOP1_Projekt
+namespace Memory_game
 {
-    public class Spelare
+    public class Spelare : ISpelare
     {
         public string Name { get; init; }
-        public Spelare(string name)
+        public Statestik Statestik { get; set; }
+        public Spelare(string name, Statestik statestik)
         {
             this.Name = name;
+            this.Statestik = statestik;
         }
     }
+
 }
