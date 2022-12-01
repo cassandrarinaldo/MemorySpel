@@ -1,0 +1,37 @@
+using System;
+
+namespace OOP1_Projekt
+{
+    public class Statistik
+    {
+        public int NewCount { get; set; }
+        public int OldCount { get; set; }
+        private Spelare spelare;
+        public Statistik(Spelare spelare, int count)
+        {
+            this.spelare = spelare;
+            this.NewCount = count;
+        }
+        public void UppdateraCount()
+        {
+            PrintStatistik();
+            OldCount = NewCount;
+        }
+        public void PrintStatistik()
+        {
+            if(NewCount < OldCount)
+            { 
+                Console.WriteLine("Bra jobbat! Du använde färre drag än förra spelet!");
+                Console.WriteLine($"Den här gången använda du {NewCount} drag, i jämförelse med förra gången då du använde {OldCount} drag!");
+            }
+            else if(NewCount == OldCount)
+            {
+                Console.WriteLine($"Du använde {NewCount}, vilket är lika många drag som förra gången! Bra jobbat!");
+            }
+            else
+            {
+                Console.WriteLine($"Du använde {NewCount} drag, vilket är fler än förra gången, då du använde dig av {OldCount} drag.");
+            }
+        }
+    }
+}
