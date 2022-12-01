@@ -1,0 +1,52 @@
+using System;
+namespace Memory_game
+{
+	public class arrayBricka
+	{
+        public IBricka[] SkapaArray()
+        {
+            Console.WriteLine("Hur vill du att brickorna på spelplanen ska se ut? Välj ett alternativ:\nTryck 1 för att spela på en förutbestämd spelplan\nTryck 2 för att välja egna ord/symboler på brickorna");
+            string? input = Console.ReadLine();
+            switch (Convert.ToInt32(input))
+            {
+                case 1:
+                    IBricka[] nyArray = new IBricka[] { new Bricka("Stjärna"), new Bricka("Måne"), new Bricka("Sol"), new Bricka("Moln"), new Bricka("Regnbåge"), new Bricka("Regn") };
+                    Console.Clear();
+                    return nyArray;
+                case 2:
+                    return GetArray();
+                default:
+                    Console.WriteLine("Du har inte angivit ett giltigt alternativ. Försök igen");
+                    return SkapaArray();
+            }
+        }
+        IBricka[] GetArray()
+        {
+            try
+            {
+                string[] arrayInput = taAnvändarInput();
+                IBricka[] nyArrayInput = new IBricka[] { new Bricka(arrayInput[0]), new Bricka(arrayInput[1]), new Bricka(arrayInput[2]), new Bricka(arrayInput[3]), new Bricka(arrayInput[4]), new Bricka(arrayInput[5]) };
+                Console.Clear();
+                return nyArrayInput;
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine(ae.Message);
+                return GetArray();
+            }
+        }
+        string[] taAnvändarInput()
+        {
+            Console.WriteLine("Ange 6st olika ord/symboler, ange mellanslag mellan orden. Du kan inte välja siffror");
+            string? inputFromUser = Console.ReadLine();
+            if (inputFromUser == null || inputFromUser == "")
+                throw new ArgumentException("Du måste ange ord eller symboler. Försök igen.");
+            else if (inputFromUser.Any(char.IsDigit))
+                throw new ArgumentException("Du kan inte välja siffror. Försök igen.");
+            else if (inputFromUser.Split().Length < 6)
+                throw new ArgumentException("Du måste ange 6st ord/symboler. Försök igen.");
+            return inputFromUser.Split();
+        }
+    }
+}
+
