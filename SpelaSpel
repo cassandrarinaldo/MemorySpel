@@ -1,0 +1,119 @@
+using System;
+
+namespace Memory_game
+{
+    public class SpelaSpel : SuperSpel
+    {
+        Statestik statestik;
+        ISpelare spelare;
+
+        int drag1, drag2;
+        int Count = 0;
+
+        public SpelaSpel(IBricka[] array, ISpelare spelare)
+            : base(array)
+        {
+            this.spelare = spelare;
+            this.statestik = spelare.Statestik;
+        }
+        public override void Game()
+        {
+            for (int i = 0; i < base.printArray.Length; i++)
+            {
+                while (printArray[i] != " ")
+                {
+                    FörstaDraget();
+                }
+                this.Count++;
+            }
+            statestik.UppdateraCount(this.Count, this.spelare);
+            this.Count = 0;
+            PostGame();
+        }
+        public override void PostGame()
+        {
+            Console.WriteLine("Spelet är slut! Vad vill du göra nu?\nTryck 1 för att spela igen." +
+                "\nTryck 2 för att avsluta spelet.");
+            int.TryParse(Console.ReadLine(), out int input);
+            switch (input)
+            {
+                case 1:
+                    StartaSpel nyttSpel = new StartaSpel(spelare);
+                    break;
+                case 2:
+                    Environment.Exit(0);
+                    break;
+                default:
+                    PostGame();
+                    break;
+            }
+        }
+        public override void FörstaDraget()
+        {
+            base.Print();
+            this.drag1 = FåDrag();
+            Console.Clear();
+            base.changeToSymbol(drag1);
+            base.Print();
+            AndraDraget();
+        }
+        public override void AndraDraget()
+        {
+            this.drag2 = FåDrag();
+            if (drag2 == drag1)
+            {
+                Console.WriteLine("Du kan inte välja samma bricka! Försök igen.");
+                AndraDraget();
+            }
+            Console.Clear();
+            base.changeToSymbol(drag2);
+            base.Print();
+            if (base.printArray[drag1] == base.printArray[drag2])
+            {
+                base.printArray[drag1] = " ";
+                base.printArray[drag2] = " ";
+                Console.WriteLine("\nBrickorna matchade, bra jobbat!\n\nTryck enter för att fortsätta.");
+            }
+            else
+            {
+                Console.WriteLine("\nBrickorna matchade inte!\n\nTryck enter för att fortsätta.");
+                base.changeToIndex(drag1);
+                base.changeToIndex(drag2);
+            }
+            Console.ReadLine();
+            Console.Clear();
+        }
+
+        private int FåDrag()
+        {
+            Console.WriteLine("\nAnge vilken bricka du vill vända på!");
+            try
+            {
+                int drag = TaAnvändarInput(Console.ReadLine());
+                return drag;
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine(ae.Message);
+                return FåDrag();
+            }
+            
+        }
+        private int TaAnvändarInput(string? input)
+        {
+            bool conversion = int.TryParse(input, out int number);
+            number--;
+            if (input == null || input == "")
+                throw new ArgumentException("Du måste ange en bricka. Försök igen.");
+            else if (!conversion)
+                throw new ArgumentException("Du har inte angivet siffra. Försök igen.");
+            else if (conversion && number >11 || number <0)
+                throw new ArgumentException("Du har inte angivit en giltig bricka. Försök igen.");
+            else if (base.printArray[number] == " ")
+                throw new ArgumentException("Du har valt en tom bricka. Försök igen.");
+            return number;
+        }
+
+    } 
+
+}
