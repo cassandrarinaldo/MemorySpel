@@ -1,43 +1,29 @@
 using System;
 namespace Memory_game
 {
-	public abstract class SuperSpel
+	public class Välkommen
 	{
-        public IBricka[] symbolArray;
-        public string[] printArray = new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
-
-        public SuperSpel(IBricka[] spelArray)
-        {
-            symbolArray = spelArray;
+		public Välkommen()
+		{
+            Console.WriteLine("Välkommen till memory!\n\n\nVid varje drag kommer du får välja två olika brickor att" +
+				" vända på.\nOm brickorna har samma symbol/ord kommer brickorna tas bort.\nOm det är olika symbol/ord kommer " +
+				"brickorna vändas tillbaka.\nDu har vunnit när alla brickrona har tagits bort.\n\n");
         }
-        public abstract void Game();
-        public abstract void PostGame();
-        public abstract void FörstaDraget();
-        public abstract void AndraDraget();
-        public string[] changeToSymbol(int indexplats)
-        {
-            printArray[indexplats] = symbolArray[indexplats].Symbol;
-            return printArray;
+		public Spelare SkapaSpelare()
+		{
+            Console.WriteLine("Ange spelarens namn:");
+            string? input = Console.ReadLine();
+			if (input == null || input == "")
+			{
+				Console.WriteLine("Du måste ange ett namn. Försök igen.");
+				return SkapaSpelare();
+			}
+			else
+			{
+				Console.Clear();
+				return new Spelare(input, new Statestik());
+			}
         }
-        public string[] changeToIndex(int indexplats)
-        {
-            string index = Convert.ToString(indexplats + 1);
-            printArray[indexplats] = index;
-
-            return printArray;
-        }
-        public void Print()
-        {
-            Console.WriteLine("-------------------------");
-            Console.WriteLine($"|  {printArray[0]}  |  {printArray[1]}  |  {printArray[2]}  |  {printArray[3]}  | ");
-            Console.WriteLine("-------------------------");
-            Console.WriteLine($"|  {printArray[4]}  |  {printArray[5]}  |  {printArray[6]}  |  {printArray[7]}  | ");
-            Console.WriteLine("-------------------------");
-            Console.WriteLine($"|  {printArray[8]}  |  {printArray[9]} |  {printArray[10]} |  {printArray[11]} | ");
-            Console.WriteLine("-------------------------");
-        }
-
-    }
-
+	}
 }
 
